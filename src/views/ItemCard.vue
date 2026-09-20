@@ -1,16 +1,12 @@
 <!-- views/ItemCard.vue -->
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import articleService from '../services/articleService';
 
 const route = useRoute()
 
-const item = {
-  id: 1,
-  name: "T-shirt blanc",
-  description: "T-shirt en coton bio, coupe classique, disponible en plusieurs tailles.",
-  price: 19.9
-}
+const item = ref(articleService.getById(route.params.id))
 </script>
 
 <template>
@@ -25,4 +21,30 @@ const item = {
 </template>
 
 <style scoped>
+.item-detail {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.item-detail h1 {
+  margin-bottom: 0.5rem;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: #42b883;
+}
+
+.not-found {
+  text-align: center;
+  padding: 3rem;
+  color: #999;
+}
 </style>
