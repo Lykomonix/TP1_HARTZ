@@ -10,7 +10,7 @@ import Login from "./views/Login.vue";
 const routes = [
     {path: "/", component: Home},
     {path: "/articles", component: Items},
-    {path: "/articles/{:id}", component: ItemCard},
+    {path: "/articles/:id", component: ItemCard},
     {path: "/ajouter", component: AddItem},
     {path: "/panier", component: Basket},
     {path: "/login", component: Login},
