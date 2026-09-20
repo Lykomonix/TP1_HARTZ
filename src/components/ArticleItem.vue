@@ -1,4 +1,5 @@
 <script setup>
+import { useRouter } from 'vue-router'
 const props = defineProps({
     id: Number,
     name: String,
@@ -6,8 +7,11 @@ const props = defineProps({
     price: Number 
 })
 
+
+const router = useRouter()
+
 function handleClick() {
-  this.$router.push(`/articles/${props.id}`)
+  router.push(`/articles/${props.id}`)
 }
 
 </script>
