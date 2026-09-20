@@ -7,6 +7,7 @@ const props = defineProps({
     price: Number 
 })
 
+const emit = defineEmits(['delete'])
 
 const router = useRouter()
 
@@ -21,5 +22,6 @@ function handleClick() {
         <p class="description">{{ description }}</p>
         <p class="price">{{ price }} €</p>
         <button @click="handleClick">Voir plus</button>
+        <button @click="$emit('delete', id)">Supprimer</button>
     </div>
 </template>

@@ -1,3 +1,7 @@
 <script setup>
+import ListeArticles from '../components/ListeArticles.vue';
+
 </script>
-<template></template>
+<template>
+    <ListeArticles/>
+</template>

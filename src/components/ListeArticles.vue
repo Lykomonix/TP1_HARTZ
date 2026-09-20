@@ -1,39 +1,23 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import ArticleItem from './ArticleItem.vue'
+import articleService from '../services/articleService.js'
 
-const items = ref([
-  {
-    id: 1,
-    name: "T-shirt blanc",
-    description: "T-shirt en coton bio, coupe classique.",
-    price: 19.9
-  },
-  {
-    id: 2,
-    name: "Jean slim",
-    description: "Jean slim bleu délavé, taille haute.",
-    price: 49.9
-  },
-  {
-    id: 3,
-    name: "Sweat à capuche",
-    description: "Sweat gris chiné, doublure polaire.",
-    price: 39.9
-  },
-  {
-    id: 4,
-    name: "Baskets blanches",
-    description: "Baskets en cuir synthétique, semelle confort.",
-    price: 59.9
-  },
-  {
-    id: 5,
-    name: "Casquette noire",
-    description: "Casquette ajustable, logo brodé.",
-    price: 14.9
-  }
-])
+const items = ref([])
+
+function loadItems() {
+  items.value = articleService.getAll()
+}
+
+function handleDelete(id) {
+  articleService.remove(id)
+  loadItems()
+}
+
+onMounted(() => {
+  loadItems()
+})
+
 </script>
 
 <template>
@@ -45,6 +29,7 @@ const items = ref([
       :name="item.name"
       :description="item.description"
       :price="item.price"
+      @delete="handleDelete"
     />
   </div>
 </template>
