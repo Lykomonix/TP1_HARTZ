@@ -1,23 +1,14 @@
 <script setup>
-import { ref, onMounted } from 'vue'
 import ArticleItem from './ArticleItem.vue'
-import articleService from '../services/articleService.js'
 
-const items = ref([])
-
-function loadItems() {
-  items.value = articleService.getAll()
-}
-
-function handleDelete(id) {
-  articleService.remove(id)
-  loadItems()
-}
-
-onMounted(() => {
-  loadItems()
+defineProps({
+  items: {
+    type: Array,
+    required: true
+  }
 })
 
+defineEmits(['delete'])
 </script>
 
 <template>
@@ -29,7 +20,7 @@ onMounted(() => {
       :name="item.name"
       :description="item.description"
       :price="item.price"
-      @delete="handleDelete"
+      @delete="$emit('delete', $event)"
     />
   </div>
 </template>
