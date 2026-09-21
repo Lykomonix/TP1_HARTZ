@@ -1,5 +1,5 @@
 <script setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 const props = defineProps({
     id: Number,
     name: String,
@@ -10,6 +10,7 @@ const props = defineProps({
 const emit = defineEmits(['delete'])
 
 const router = useRouter()
+const route = useRoute()
 
 function handleClick() {
   router.push(`/articles/${props.id}`)
@@ -21,8 +22,8 @@ function handleClick() {
         <h2>{{ name }}</h2>
         <p class="description">{{ description }}</p>
         <p class="price">{{ price }} €</p>
-        <button @click="handleClick">Voir plus</button>
-        <button @click="$emit('delete', id)">Supprimer</button>
+        <button v-show="route.path !== '/admin'" @click="handleClick">Voir plus</button>
+        <button v-show="route.path === '/admin'" class="delete-button" @click="$emit('delete', id)">Supprimer</button>
     </div>
 </template>
 
@@ -90,13 +91,13 @@ function handleClick() {
     background-color: #369870;
 }
 
-.item-card button:last-of-type {
+.item-card .delete-button {
     background-color: transparent;
     color: #e74c3c;
     border: 1px solid #e74c3c;
 }
 
-.item-card button:last-of-type:hover {
+.item-card .delete-button:hover {
     background-color: #e74c3c;
     color: white;
 }
